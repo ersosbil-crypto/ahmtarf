@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ahmet Arif | Şairin Web Sayfası</title>
+    
+    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter & Merriweather --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Merriweather:ital,wght@0,400;1,700&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN --><script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* Modern fontları uygula */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* gray-900 */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 900; /* Extra bold */
+        }
+        blockquote, .poem-snippet {
+            font-family: 'Merriweather', serif; /* Şiirler için daha edebi bir font */
+        }
+        
+        /* Özel Zaman Çizelgesi Stili */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem; /* 40px */
+            padding-bottom: 2rem; /* 32px */
+            border-left: 3px solid #374151; /* gray-700 */
+        }
+        .timeline-item:last-child {
+            border-left: 3px solid transparent;
+            padding-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -0.6875rem; /* -11px */
+            top: 0.25rem; /* 4px */
+            width: 1.25rem; /* 20px */
+            height: 1.25rem; /* 20px */
+            border-radius: 9999px; /* rounded-full */
+            background-color: #3B82F6; /* blue-500 */
+            border: 4px solid #1F2937; /* gray-800 */
+            transition: all 0.3s ease;
+        }
+        .timeline-item:hover::before {
+            transform: scale(1.1);
+            background-color: #60A5FA; /* blue-400 */
+        }
+        /* Şiir kartındaki görselin boyutunu ve konumunu ayarlamak için */
+        .poem-card-image {
+            height: 150px; /* Sabit yükseklik */
+            object-fit: cover; /* Resmi kutuya sığdırırken oranını koru */
+            width: 100%;
+            border-radius: 0.5rem; /* rounded-lg */
+            margin-bottom: 1rem; /* 16px */
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased">
+
+    <!-- Ana İçerik (ANA SAYFA) -->
+    <div id="main-content">
+        <div class="container mx-auto max-w-6xl p-4 md:p-8">
+
+            <!-- HERO BÖLÜMÜ --><header class="grid md:grid-cols-5 gap-8 md:gap-12 items-center my-12 md:my-20">
+                <!-- Portre --><div class="md:col-span-2 flex justify-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/tr/b/b3/Ahmet_Arif.jpg" 
+                         alt="Ahmet Arif Portresi" 
+                         class="rounded-lg shadow-2xl object-cover w-full max-w-sm md:max-w-full h-auto md:h-[500px] border-4 border-gray-700"
+                         onerror="this.onerror=null;this.src='https://placehold.co/400x500/333/ccc?text=Ahmet+Arif+Portresi';">
+                </div>
+
+                <!-- Tanıtım Metni --><div class="md:col-span-3 text-center md:text-left">
+                    <h1 class="text-5xl md:text-7xl font-black text-white leading-tight">
+                        Ahmet Arif
+                    </h1>
+                    <p class="text-2xl md:text-3xl text-blue-400 font-semibold mt-2">
+                        "Anadolu'nun Sesi, Asi Şair"
+                    </p>
+                    <p class="text-lg text-gray-300 mt-6 leading-relaxed max-w-prose mx-auto md:mx-0">
+                        Ahmet Arif, toplumcu gerçekçi şiirin Türkiye'deki en önemli temsilcilerinden biridir. Şiirlerinde Anadolu insanının acısını, isyanını, umudunu ve sevdasını benzersiz bir lirizm ve destansı bir anlatımla dile getirmiştir.
+                    </p>
+                    
+                    <blockquote class="mt-8 p-4 border-l-4 border-blue-500 bg-gray-800 rounded-r-lg italic text-xl text-gray-300">
+                        "Vurulmuşum...
+                        Düşüm, gecelerden de kara.
+                        Bir hayın, bir de vurdum amansız.
+                        Ve böylece bir daha,
+                        Vurulmuşum yaram derinden..."
+                    </blockquote>
+                </div>
+            </header>
+
+            <!-- ESERLERİ / ŞİİRLERİNDEN SEÇMELER --><section class="my-20 md:my-32">
+                <h2 class="text-4xl font-bold text-center text-white mb-12 flex items-center justify-center gap-3">
+                    <i data-lucide="book-open" class="w-10 h-10 text-blue-400"></i>
+                    Ölümsüz Mısralar
+                </h2>
+                
+                <p class="text-center text-gray-400 text-lg max-w-3xl mx-auto mb-16">
+                    Tek şiir kitabı "Hasretinden Prangalar Eskittim", Türkiye edebiyatının en çok okunan şiir kitaplarından biri olmuştur. İşte o kitaptan bazı unutulmaz eserler:
+                </p>
+
+                <!-- Şiir Kartları --><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                    
+                    <!-- Kart 1: Anadolu (Tıklanabilir Link) -->
+                    <a href="#" onclick="showPoem('anadolu', event)" class="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-blue-500/30 hover:-translate-y-2 transition-all duration-300 transform flex flex-col group">
+                        <img src="https://images.unsplash.com/photo-1549414619-fa19a96e622b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxfHxhbmFkb2xpYW4lMjBsYW5kc2NhcGV8ZW58MHx8fHwxNzA3OTI2MDA2fDA&ixlib=rb-4.0.3&q=80&w=1080" 
+                             alt="Anadolu Manzarası" 
+                             class="poem-card-image">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Anadolu</h3>
+                        <p class="poem-snippet text-gray-300 leading-relaxed italic flex-grow">
+                            "Beşiğin, yurdum,
+                            Mezarın...
+                            Düşmesin,
+                            Gözlerine
+                            Bir damla yaş,
+                            Olan, olmuş..."
+                        </p>
+                    </a>
+
+                    <!-- Kart 2: Ay Karanlık (Tıklanabilir Link) -->
+                    <a href="#" onclick="showPoem('ay-karanlik', event)" class="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-blue-500/30 hover:-translate-y-2 transition-all duration-300 transform flex flex-col group">
+                        <img src="https://images.unsplash.com/photo-1516738901170-fd700e4701a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwyfHxtb29uJTIwbmlnaHQlMjBzY2VuZXJ5fGVufDB8fHx8MTcwNzkyNjAwNnww&ixlib=rb-4.0.3&q=80&w=1080" 
+                             alt="Ay Karanlık Gece" 
+                             class="poem-card-image">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Ay Karanlık</h3>
+                        <p class="poem-snippet text-gray-300 leading-relaxed italic flex-grow">
+                            "Maviye
+                            Maviye çalar gözlerin,
+                            Canıma bedelsin.
+                            Deli kan..."
+                        </p>
+                    </a>
+                    
+                    <!-- Kart 3: Otuz Üç Kurşun (Tıklanabilir Link) -->
+                    <a href="#" onclick="showPoem('otuz-uc-kursun', event)" class="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-blue-500/30 hover:-translate-y-2 transition-all duration-300 transform flex flex-col group">
+                        <img src="https://images.unsplash.com/photo-1588698188151-5126839d375d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwxNXx8ZGVzZXJ0JTIwbW91bnRhaW5zfGVufDB8fHx8MTcwNzkyNjAwNnww&ixlib=rb-4.0.3&q=80&w=1080" 
+                             alt="Dağlık Arazi" 
+                             class="poem-card-image">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Otuz Üç Kurşun</h3>
+                        <p class="poem-snippet text-gray-300 leading-relaxed italic flex-grow">
+                            "Bu dağ Mengene dağıdır
+                            Tanyeri atanda Van’da
+                            Bu dağ Nemrut eteğidir
+                            Güneşin kavuştuğu yerde..."
+                        </p>
+                    </a>
+
+                    <!-- Kart 4: Hasretinden Prangalar Eskittim (Tıklanabilir Link) -->
+                    <a href="#" onclick="showPoem('hasretinden-prangalar', event)" class="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-blue-500/30 hover:-translate-y-2 transition-all duration-300 transform flex flex-col group">
+                        <img src="https://images.unsplash.com/photo-1557683316-973673baf923?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1MDcxMzJ8MHwxfHNlYXJjaHwzfHxlbW90aW9uYWwlMjBjaGFpbnN8ZW58MHx8fHwxNzA3OTI2MDA2fDA&ixlib=rb-4.0.3&q=80&w=1080" 
+                             alt="Zincirler ve Umut" 
+                             class="poem-card-image">
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">Hasretinden Prangalar...</h3>
+                        <p class="poem-snippet text-gray-300 leading-relaxed italic flex-grow">
+                            "Seni, anlatabilmek seni.
+                            İyi çocuklara, kahramanlara.
+                            Seni, anlatabilmek seni,
+                            Namussuza, haldan bilmeze..."
+                        </p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- HAYATINDAN KESİTLER (ZAMAN ÇİZELGESİ) --><section class="my-20 md:my-32">
+                <h2 class="text-4xl font-bold text-center text-white mb-16 flex items-center justify-center gap-3">
+                    <i data-lucide="calendar-days" class="w-10 h-10 text-blue-400"></i>
+                    Hayatından Kesitler
+                </h2>
+
+                <div class="max-w-2xl mx-auto">
+                    <ul>
+                        <!-- Madde 1 --><li class="timeline-item">
+                            <h3 class="text-xl md:text-2xl font-bold text-blue-400 mb-1">1927</h3>
+                            <p class="text-gray-300">21 Nisan 1927'de Diyarbakır'ın Hançepek semtinde dünyaya geldi. Asıl adı Ahmed Önal'dır.</p>
+                        </li>
+                        <!-- Madde 2 --><li class="timeline-item">
+                            <h3 class="text-xl md:text-2xl font-bold text-blue-400 mb-1">1940 - 1950</h3>
+                            <p class="text-gray-300">Ortaöğrenimini Diyarbakır Lisesi'nde tamamladı. Ankara Üniversitesi Dil ve Tarih-Coğrafya Fakültesi Felsefe Bölümü'ne kaydoldu. Bu yıllarda siyasi nedenlerle birkaç kez tutuklandı ve öğrencilik hayatı kesintiye uğradı.</p>
+                        </li>
+                        <!-- Madde 3 --><li class="timeline-item">
+                            <h3 class="text-xl md:text-2xl font-bold text-blue-400 mb-1">1950 - 1959</h3>
+                            <p class="text-gray-300">Şiirleri çeşitli dergilerde yayımlanmaya başladı. Siyasi görüşleri nedeniyle takibata uğradı ve 1952-1959 yılları arasında defalarca hapis yattı.</p>
+                        </li>
+                        <!-- Madde 4 --><li class="timeline-item">
+                            <h3 class="text-xl md:text-2xl font-bold text-blue-400 mb-1">1968</h3>
+                            <p class="text-gray-300">Tek şiir kitabı olan "Hasretinden Prangalar Eskittim" yayımlandı ve büyük yankı uyandırdı. Edebiyat tarihinin en çok basılan kitaplarından biri oldu.</p>
+                        </li>
+                        <!-- Madde 5 --><li class="timeline-item">
+                            <h3 class="text-xl md:text-2xl font-bold text-blue-400 mb-1">1991</h3>
+                            <p class="text-gray-300">2 Haziran 1991'de Ankara'daki evinde geçirdiği kalp krizi sonucu hayatını kaybetti.</p>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div> <!-- #main-content sonu -->
+
+    <!-- ŞİİR DETAY SAYFASI (GİZLİ) -->
+    <div id="poem-detail-page" class="hidden container mx-auto max-w-3xl p-4 md:p-8 my-12 md:my-20 text-gray-200">
+        <button onclick="showMainPage()" class="mb-8 inline-flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg shadow-lg transition-colors duration-200">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+            Geri Dön
+        </button>
+        <h2 id="poem-title" class="text-4xl md:text-6xl font-black text-white mb-10 border-b-2 border-gray-700 pb-4"></h2>
+        <div id="poem-text" class="poem-snippet text-xl md:text-2xl text-gray-300 leading-relaxed whitespace-pre-line">
+            <!-- Şiir metni buraya JS ile eklenecek -->
+        </div>
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer class="text-center text-gray-500 py-10 mt-12 border-t border-gray-800">
+        <p>"Terk etmedi sevdan beni..."</p>
+        <p class="mt-2 text-sm">Ahmet Arif (1927 - 1991)</p>
+    </footer>
+
+    <!-- SAYFA GEÇİŞ SCRIPTLERİ -->
+    <script>
+        // Şiir veritabanı (Demo için kısa metinler)
+        const poems = {
+            'anadolu': {
+                title: 'Anadolu',
+                text: `Beşiğin, yurdum,\nMezarın...\nDüşmesin,\nGözlerine\nBir damla yaş,\nOlan, olmuş...\n\nBebe,\nMavi-boncuk,\nGöz-boncuğu,\nNazar-boncuğu,\nMercan-boncuk...\nDeğil,\nCıgaram,\nÇakmağım,\nZulamdaki,\nİki-üç-atımlık\nToz...\n\nSen,\nanadolum,\nSeni,\nNerde,\nUnuttular,\nBu...\nAğrılar,\nBu...\nAcılar,\nBu...\nBela...\nSende,mi,\nbulmuş...`
+            },
+            'ay-karanlik': {
+                title: 'Ay Karanlık',
+                text: `Maviye\nMaviye çalar gözlerin,\nCanıma bedelsin.\nDeli kan...\n\nMaviye,\nMaviye çalar gözlerin,\nCanıma bedelsin.\nAy karanlık...\n\nGitme,\nGözlerini,\nBırak...\nAy karanlık,\nVe geceler boyu\nHasretin\nPrangalar eskitir\nYüreğimde.\n\nDuvarlar,\nO zindan duvarları,\nSöyle,\nNeye yarar,\nSensiz...`
+            },
+            'otuz-uc-kursun': {
+                title: 'Otuz Üç Kurşun',
+                text: `Bu dağ Mengene dağıdır\nTanyeri atanda Van’da\nBu dağ Nemrut eteğidir\nGüneşin kavuştuğu yerde...\n\nBir yanın çığ,\nBir yanın sevdadır.\nDört mevsim,\nDört\nTaze\nFidan\nGibidir.\n\nKirvem,\nHallim, \nAhvalim \nBudur...\n\nBu dağlarda\nKopan her çığ,\nKopan her dal,\nKopan her...\nAh...\nBenden\ngider...`
+            },
+            'hasretinden-prangalar': {
+                title: 'Hasretinden Prangalar Eskittim',
+                text: `Seni, anlatabilmek seni.\nİyi çocuklara, kahramanlara.\nSeni, anlatabilmek seni,\nNamussuza, haldan bilmeze...\n\nDüşsem,\nYollara,\nYollara...\nGözleri\nÇapaklı\nÇocukların\nBastığı\nKömür\nTozuna\nDüşsem...\n\nOğlum, \nBırak,\nAcılar,\nBeni,\nBulsun...\nBeni,\nSarmasın,\nO...\nGüzel,\nGözlerin...`
+            }
+        };
+
+        // Gerekli DOM elementleri
+        const mainContent = document.getElementById('main-content');
+        const poemDetailPage = document.getElementById('poem-detail-page');
+        const poemTitleEl = document.getElementById('poem-title');
+        const poemTextEl = document.getElementById('poem-text');
+        const footer = document.querySelector('footer');
+
+        // Şiir detay sayfasını gösteren fonksiyon
+        function showPoem(poemId, event) {
+            event.preventDefault(); // href="#"'in sayfa atlamasını engelle
+            
+            const poem = poems[poemId];
+            if (!poem) return; // Şiir bulunamazsa bir şey yapma
+
+            // İçeriği doldur
+            poemTitleEl.innerText = poem.title;
+            poemTextEl.innerText = poem.text; // innerText, \n (yeni satır) karakterlerini korur
+
+            // Sayfaları değiştir
+            mainContent.classList.add('hidden');
+            footer.classList.add('hidden'); // Footer'ı da gizle
+            poemDetailPage.classList.remove('hidden');
+
+            // Sayfanın başına git
+            window.scrollTo(0, 0);
+        }
+
+        // Ana sayfayı gösteren fonksiyon
+        function showMainPage() {
+            // Sayfaları değiştir
+            poemDetailPage.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+            footer.classList.remove('hidden'); // Footer'ı geri getir
+            
+            // Sayfanın başına git
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+    <!-- Lucide Icons script'ini etkinleştir -->
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+</html>
